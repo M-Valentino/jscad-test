@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 
 const Index = () => {
-  const [sliderYValue, setsliderYValue] = useState(100);
-  const [sliderXValue, setsliderXValue] = useState(100);
+  const [sliderYValue, setSliderYValue] = useState(100);
+  const [sliderXValue, setSliderXValue] = useState(100);
   const offset = 10;
-  const handleSliderYChange = (e) => {
-    setsliderYValue(parseInt(e.target.value));
+  
+  const handleSliderYChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSliderYValue(parseInt(e.target.value));
   };
-  const handleSliderXChange = (e) => {
-    setsliderXValue(parseInt(e.target.value));
+
+  const handleSliderXChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSliderXValue(parseInt(e.target.value));
   };
 
   return (

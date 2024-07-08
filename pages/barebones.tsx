@@ -1,7 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { OpenJSCADProps } from "openjscad-react";
-import { FormGroup } from "../src/FormGroup";
 
 // Dynamic import
 const OpenJSCAD: React.ComponentType<OpenJSCADProps> = dynamic(

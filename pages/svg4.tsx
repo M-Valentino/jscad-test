@@ -1,4 +1,3 @@
-import { Slider } from "@mui/material";
 import React, { useState } from "react";
 
 const Index = () => {
@@ -73,11 +72,10 @@ const Index = () => {
             y2={offset}
           />
         </g>
-        {/* <path d={`M 10,${offset + 100} A 50,10 0 0,1 110,${offset + 100}`} fill="none" stroke="green" strokeWidth={0.5} /> */}
         <path
-          d={`M 10,${offset + sliderYValue} A ${sliderXValue / 2},10 0 0,0 ${
-            offset + sliderXValue
-          },${offset + sliderYValue}`}
+          d={`M ${offset},${offset + sliderYValue} A ${
+            sliderXValue / 2
+          },${offset} 0 0,0 ${offset + sliderXValue},${offset + sliderYValue}`}
           fill="none"
           stroke="blue"
           strokeWidth={0.5}

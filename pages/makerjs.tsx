@@ -6,39 +6,30 @@ const Home: FC = () => {
   const [width, setWidth] = useState<number>(100);
   const [height, setHeight] = useState<number>(100);
 
-  const draw = (width: number, height: number) => {
-    const pathArray = [
-      {
-        type: "line",
-        origin: [0, 0],
-        end: [0, height],
+  const draw = () => {
+    let model: makerjs.IModel = {
+      paths: {
+        line1: new makerjs.paths.Line([0, 0], [0, height]),
+        line2: new makerjs.paths.Line([0, height], [width, height]),
+        line3: new makerjs.paths.Line([width, height], [width, 0]),
+        line4: new makerjs.paths.Line([width, 0], [0, 0]),
       },
-      {
-        type: "line",
-        origin: [0, height],
-        end: [width, height],
+      models: {
+        ellipse1: new makerjs.models.Ellipse([width /2, 0], width / 2,  20),
+        
       },
-      {
-        type: "line",
-        origin: [width, height],
-        end: [width, 0],
-      },
-      {
-        type: "line",
-        origin: [0, 0],
-        end: [width, 0],
-      },
-    ];
+    };
 
-    const svg = makerjs.exporter.toSVG(pathArray, {
-      // scale: 1.2,
+
+    const svg = makerjs.exporter.toSVG(model, {
+      // scale: 2,
       strokeWidth: "0.5mm",
     });
     setSVGData(svg);
   };
 
   useEffect(() => {
-    draw(width, height);
+    draw();
   }, [width, height]);
 
   const handleWidthChange = (event: React.ChangeEvent<HTMLInputElement>) => {

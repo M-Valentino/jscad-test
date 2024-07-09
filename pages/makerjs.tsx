@@ -19,7 +19,7 @@ const Home: FC = () => {
 
     const pathArray = [line, circle];
 
-    const svg = makerjs.exporter.toSVG(pathArray);
+    const svg = makerjs.exporter.toSVG(pathArray, {scale: 1.1});
     setSVGData(svg);
   };
 

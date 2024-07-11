@@ -8,9 +8,16 @@ const Home: FC = () => {
   const offset = 30;
 
   const dimensionLine = (p1: [number, number], p2: [number, number]) => {
+    const dimensionOffset = 5;
     return {
-      a: new makerjs.paths.Line(p1, [p1[0] + 30, p1[1]]),
-      b: new makerjs.paths.Line(p2, [p2[0] + 30, p2[1]]),
+      a: new makerjs.paths.Line(
+        [p1[0] + dimensionOffset, p1[1]],
+        [p1[0] + 30, p1[1]]
+      ),
+      b: new makerjs.paths.Line(
+        [p2[0] + dimensionOffset, p2[1]],
+        [p2[0] + 30, p2[1]]
+      ),
     };
   };
 
@@ -19,7 +26,10 @@ const Home: FC = () => {
     const topArc = new makerjs.models.EllipticArc(0, 180, width / 2, 25);
     let invisibleBox = new makerjs.models.Rectangle(300, 300);
 
-    const dimensionLines = dimensionLine([offset + width, offset], [offset + width, offset + height]);
+    const dimensionLines = dimensionLine(
+      [offset + width, offset],
+      [offset + width, offset + height]
+    );
 
     let model: makerjs.IModel = {
       paths: {

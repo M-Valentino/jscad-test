@@ -7,7 +7,8 @@ const Home: FC = () => {
   const [height, setHeight] = useState<number>(100);
 
   const draw = () => {
-    let arc = new makerjs.models.EllipticArc(180, 0, 50, 25);
+    const botArc = new makerjs.models.EllipticArc(180, 0, width / 2, 25);
+    const TopArc = new makerjs.models.EllipticArc(0, 180, width / 2, 25);
 
     let model: makerjs.IModel = {
       paths: {
@@ -17,7 +18,8 @@ const Home: FC = () => {
         line4: new makerjs.paths.Line([width, 0], [0, 0]),
       },
       models: {
-        arc: makerjs.model.move(arc, [width / 2, 0]),
+        botArc: makerjs.model.move(botArc, [width / 2, 0]),
+        TopArc: makerjs.model.move(TopArc, [width / 2, height]),
       },
     };
 

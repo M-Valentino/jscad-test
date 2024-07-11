@@ -7,6 +7,8 @@ const Home: FC = () => {
   const [height, setHeight] = useState<number>(100);
 
   const draw = () => {
+    let arc = new makerjs.models.EllipticArc(180, 0, 50, 25);
+
     let model: makerjs.IModel = {
       paths: {
         line1: new makerjs.paths.Line([0, 0], [0, height]),
@@ -15,11 +17,9 @@ const Home: FC = () => {
         line4: new makerjs.paths.Line([width, 0], [0, 0]),
       },
       models: {
-        ellipse1: new makerjs.models.Ellipse([width /2, 0], width / 2,  20),
-        
+        arc: makerjs.model.move(arc, [width / 2, 0]),
       },
     };
-
 
     const svg = makerjs.exporter.toSVG(model, {
       // scale: 2,

@@ -5,21 +5,34 @@ const Home: FC = () => {
   const [svgData, setSVGData] = useState<string | null>(null);
   const [width, setWidth] = useState<number>(100);
   const [height, setHeight] = useState<number>(100);
-
+  const offset = 30;
   const draw = () => {
     const botArc = new makerjs.models.EllipticArc(180, 0, width / 2, 25);
-    const TopArc = new makerjs.models.EllipticArc(0, 180, width / 2, 25);
+    const topArc = new makerjs.models.EllipticArc(0, 180, width / 2, 25);
+    let invisibleBox = new makerjs.models.Rectangle(300, 300);
 
     let model: makerjs.IModel = {
       paths: {
-        line1: new makerjs.paths.Line([0, 0], [0, height]),
-        line2: new makerjs.paths.Line([0, height], [width, height]),
-        line3: new makerjs.paths.Line([width, height], [width, 0]),
-        line4: new makerjs.paths.Line([width, 0], [0, 0]),
+        line1: new makerjs.paths.Line(
+          [offset, offset],
+          [offset, height + offset]
+        ),
+
+        line3: new makerjs.paths.Line(
+          [width + offset, height + offset],
+          [width + offset, offset]
+        ),
       },
       models: {
-        botArc: makerjs.model.move(botArc, [width / 2, 0]),
-        TopArc: makerjs.model.move(TopArc, [width / 2, height]),
+        botArc: makerjs.model.moveRelative(botArc, [
+          width / 2 + offset,
+          offset,
+        ]),
+        topArc: makerjs.model.moveRelative(topArc, [
+          width / 2 + offset,
+          height + offset,
+        ]),
+        invisibleBox: invisibleBox,
       },
     };
 

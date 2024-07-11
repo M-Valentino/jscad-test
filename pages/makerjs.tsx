@@ -7,17 +7,27 @@ const Home: FC = () => {
   const [height, setHeight] = useState<number>(100);
   const offset = 30;
 
-  const dimensionLine = (p1: [number, number], p2: [number, number]) => {
+  const dimensionLine = (
+    p1: [number, number],
+    p2: [number, number],
+    dimHeight: number
+  ) => {
     const dimensionOffset = 5;
     return {
-      a: new makerjs.paths.Line(
-        [p1[0] + dimensionOffset, p1[1]],
-        [p1[0] + 30, p1[1]]
-      ),
-      b: new makerjs.paths.Line(
-        [p2[0] + dimensionOffset, p2[1]],
-        [p2[0] + 30, p2[1]]
-      ),
+      paths: {
+        a: new makerjs.paths.Line(
+          [p1[0] + dimensionOffset, p1[1]],
+          [p1[0] + dimHeight, p1[1]]
+        ),
+        b: new makerjs.paths.Line(
+          [p2[0] + dimensionOffset, p2[1]],
+          [p2[0] + dimHeight, p2[1]]
+        ),
+        c: new makerjs.paths.Line(
+          [p1[0] + (dimHeight  - 10), p1[1]],
+          [p2[0] + (dimHeight  - 10), p2[1]]
+        ),
+      },
     };
   };
 
@@ -26,14 +36,15 @@ const Home: FC = () => {
     const topArc = new makerjs.models.EllipticArc(0, 180, width / 2, 25);
     let invisibleBox = new makerjs.models.Rectangle(300, 300);
 
-    const dimensionLines = dimensionLine(
+    const dimensionLine1 = dimensionLine(
       [offset + width, offset],
-      [offset + width, offset + height]
+      [offset + width, offset + height],
+      30
     );
 
     let model: makerjs.IModel = {
       paths: {
-        ...dimensionLines,
+        ...dimensionLine1.paths,
         line1: new makerjs.paths.Line(
           [offset, offset],
           [offset, height + offset]
@@ -59,7 +70,7 @@ const Home: FC = () => {
 
     const svg = makerjs.exporter.toSVG(model, {
       // scale: 2,
-      strokeWidth: "0.5mm",
+      strokeWidth: "0.3mm",
     });
     setSVGData(svg);
   };

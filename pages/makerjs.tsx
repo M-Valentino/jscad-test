@@ -6,13 +6,24 @@ const Home: FC = () => {
   const [width, setWidth] = useState<number>(100);
   const [height, setHeight] = useState<number>(100);
   const offset = 30;
+
+  const dimensionLine = (p1: [number, number], p2: [number, number]) => {
+    return {
+      a: new makerjs.paths.Line(p1, [p1[0] + 30, p1[1]]),
+      b: new makerjs.paths.Line(p2, [p2[0] + 30, p2[1]]),
+    };
+  };
+
   const draw = () => {
     const botArc = new makerjs.models.EllipticArc(180, 0, width / 2, 25);
     const topArc = new makerjs.models.EllipticArc(0, 180, width / 2, 25);
     let invisibleBox = new makerjs.models.Rectangle(300, 300);
 
+    const dimensionLines = dimensionLine([offset + width, offset], [offset + width, offset + height]);
+
     let model: makerjs.IModel = {
       paths: {
+        ...dimensionLines,
         line1: new makerjs.paths.Line(
           [offset, offset],
           [offset, height + offset]

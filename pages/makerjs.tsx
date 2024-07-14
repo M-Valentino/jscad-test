@@ -23,9 +23,19 @@ const Home: FC = () => {
           [p2[0] + dimensionOffset, p2[1]],
           [p2[0] + dimHeight, p2[1]]
         ),
+        // vertical bar
         c: new makerjs.paths.Line(
           [p1[0] + (dimHeight  - 10), p1[1]],
           [p2[0] + (dimHeight  - 10), p2[1]]
+        ),
+        // bottom arrow lines
+        d1: new makerjs.paths.Line(
+          [p1[0] + (dimHeight  - 10), p1[1]],
+          [p1[0] + (dimHeight  - 10) + 2, p1[1] + 4]
+        ),
+        d2: new makerjs.paths.Line(
+          [p1[0] + (dimHeight  - 10), p1[1]],
+          [p1[0] + (dimHeight  - 10) - 2, p1[1] + 4]
         ),
       },
     };
@@ -70,7 +80,7 @@ const Home: FC = () => {
 
     const svg = makerjs.exporter.toSVG(model, {
       // scale: 2,
-      strokeWidth: "0.3mm",
+      strokeWidth: "0.2mm",
     });
     setSVGData(svg);
   };

@@ -1,11 +1,17 @@
 import React, { useEffect, useState, FC } from "react";
 import makerjs from "makerjs";
+import opentype from "opentype.js";
 
 const Home: FC = () => {
   const [svgData, setSVGData] = useState<string | null>(null);
   const [width, setWidth] = useState<number>(100);
   const [height, setHeight] = useState<number>(100);
+  const [text, setText] = useState<any>(null);
   const offset = 30;
+
+
+     
+  
 
   const dimensionLine = (
     p1: [number, number],
@@ -86,6 +92,10 @@ const Home: FC = () => {
           height + offset,
         ]),
         invisibleBox: invisibleBox,
+        text: makerjs.model.moveRelative(text, [
+          width / 2 + offset,
+          offset,
+        ]),
       },
     };
 
@@ -97,6 +107,17 @@ const Home: FC = () => {
   };
 
   useEffect(() => {
+    opentype.load(
+      "/fonts/stardosstencil/StardosStencil-Bold.ttf",
+      function (err, font) {
+        if (err) {
+          console.log(err);
+        } else {
+          // TODO fix any type
+          setText( new makerjs.models.Text(font as any, "Hello", 100));
+        }
+      }
+    );
     draw();
   }, [width, height]);
 

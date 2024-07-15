@@ -19,6 +19,7 @@
     "makerjs": "^0.18.1",
     "next": "^14.2.4",
     "openjscad-react": "^0.0.1-canary-07",
+    "opentype.js": "^1.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^1.8.10"

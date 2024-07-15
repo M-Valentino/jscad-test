@@ -25,17 +25,28 @@ const Home: FC = () => {
         ),
         // vertical bar
         c: new makerjs.paths.Line(
-          [p1[0] + (dimHeight  - 10), p1[1]],
-          [p2[0] + (dimHeight  - 10), p2[1]]
+          [p1[0] + (dimHeight - 10), p1[1]],
+          [p2[0] + (dimHeight - 10), p2[1]]
         ),
+
         // bottom arrow lines
         d1: new makerjs.paths.Line(
-          [p1[0] + (dimHeight  - 10), p1[1]],
-          [p1[0] + (dimHeight  - 10) + 2, p1[1] + 4]
+          [p1[0] + (dimHeight - 10), p1[1]],
+          [p1[0] + (dimHeight - 10) + 2, p1[1] + 4]
         ),
         d2: new makerjs.paths.Line(
-          [p1[0] + (dimHeight  - 10), p1[1]],
-          [p1[0] + (dimHeight  - 10) - 2, p1[1] + 4]
+          [p1[0] + (dimHeight - 10), p1[1]],
+          [p1[0] + (dimHeight - 10) - 2, p1[1] + 4]
+        ),
+
+        // top arrow lines
+        e1: new makerjs.paths.Line(
+          [p2[0] + (dimHeight - 10), p2[1]],
+          [p2[0] + (dimHeight - 10) + 2, p2[1] - 4]
+        ),
+        e2: new makerjs.paths.Line(
+          [p2[0] + (dimHeight - 10), p2[1]],
+          [p2[0] + (dimHeight - 10) - 2, p2[1] - 4]
         ),
       },
     };

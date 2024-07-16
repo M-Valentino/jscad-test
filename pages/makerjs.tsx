@@ -5,7 +5,7 @@ const Home: FC = () => {
   const [svgData, setSVGData] = useState<string | null>(null);
   const [width, setWidth] = useState<number>(100);
   const [height, setHeight] = useState<number>(100);
-  const offset = 30;
+  const offset = 50;
 
   const dimensionLine = (
     p1: [number, number],
@@ -54,7 +54,16 @@ const Home: FC = () => {
 
   const draw = () => {
     const botArc = new makerjs.models.EllipticArc(180, 0, width / 2, 25);
+    const botArcMoved = makerjs.model.moveRelative(botArc, [
+      width / 2 + offset,
+      offset,
+    ]);
     const topArc = new makerjs.models.EllipticArc(0, 180, width / 2, 25);
+    const topArcMoved = makerjs.model.moveRelative(topArc, [
+      width / 2 + offset,
+      height + offset,
+    ]);
+    
     let invisibleBox = new makerjs.models.Rectangle(300, 300);
 
     const dimensionLine1 = dimensionLine(
@@ -77,14 +86,9 @@ const Home: FC = () => {
         ),
       },
       models: {
-        botArc: makerjs.model.moveRelative(botArc, [
-          width / 2 + offset,
-          offset,
-        ]),
-        topArc: makerjs.model.moveRelative(topArc, [
-          width / 2 + offset,
-          height + offset,
-        ]),
+        botArc: botArcMoved,
+        topArc: topArcMoved,
+
         invisibleBox: invisibleBox,
       },
     };

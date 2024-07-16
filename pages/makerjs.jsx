@@ -1,16 +1,16 @@
-import React, { useEffect, useState, FC } from "react";
+import React, { useEffect, useState } from "react";
 import makerjs from "makerjs";
 
-const Home: FC = () => {
-  const [svgData, setSVGData] = useState<string | null>(null);
-  const [width, setWidth] = useState<number>(100);
-  const [height, setHeight] = useState<number>(100);
+const Home = () => {
+  const [svgData, setSVGData] = useState(null);
+  const [width, setWidth] = useState(100);
+  const [height, setHeight] = useState(100);
   const offset = 50;
 
   const dimensionLine = (
-    p1: [number, number],
-    p2: [number, number],
-    dimHeight: number
+    p1,
+    p2,
+    dimHeight
   ) => {
     const dimensionOffset = 5;
     return {
@@ -58,12 +58,14 @@ const Home: FC = () => {
       width / 2 + offset,
       offset,
     ]);
-    const topArc = new makerjs.models.EllipticArc(0, 180, width / 2, 25);
+    let topArc = new makerjs.models.EllipticArc(0, 180, width / 2, 25);
     const topArcMoved = makerjs.model.moveRelative(topArc, [
       width / 2 + offset,
       height + offset,
     ]);
-    
+
+    let box = new makerjs.models.Rectangle(100, 50);
+    box.origin = [0, 0];
     let invisibleBox = new makerjs.models.Rectangle(300, 300);
 
     const dimensionLine1 = dimensionLine(
@@ -72,7 +74,7 @@ const Home: FC = () => {
       30
     );
 
-    let model: makerjs.IModel = {
+    let model = {
       paths: {
         ...dimensionLine1.paths,
         line1: new makerjs.paths.Line(
@@ -89,6 +91,7 @@ const Home: FC = () => {
         botArc: botArcMoved,
         topArc: topArcMoved,
 
+        // valve: makerjs.model.combineUnion(botArcMoved, box),
         invisibleBox: invisibleBox,
       },
     };
@@ -104,11 +107,11 @@ const Home: FC = () => {
     draw();
   }, [width, height]);
 
-  const handleWidthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleWidthChange = (event) => {
     setWidth(Number(event.target.value));
   };
 
-  const handleHeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleHeightChange = (event) => {
     setHeight(Number(event.target.value));
   };
 

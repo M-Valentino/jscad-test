@@ -91,7 +91,7 @@ const Home = () => {
         botArc: botArcMoved,
         topArc: topArcMoved,
 
-        valve: makerjs.model.combine(botArcMoved, box, false, true, true, false),
+        // valve: makerjs.model.combine(botArcMoved, box, false, true, true, false),
         invisibleBox: invisibleBox,
       },
     };

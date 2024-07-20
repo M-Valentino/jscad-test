@@ -14,6 +14,7 @@
   "dependencies": {
     "@jscad/modeling": "^2.12.2",
     "@jscad/svg-serializer": "^2.3.15",
+    "d3": "^7.9.0",
     "downloadjs": "^1.4.7",
     "lodash.debounce": "^4.0.8",
     "makerjs": "^0.18.1",

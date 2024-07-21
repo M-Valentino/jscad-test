@@ -21,53 +21,23 @@ const Index = () => {
     // Clear previous content
     svg.selectAll("*").remove();
 
-    // Draw lines
-    svg
-      .append("line")
-      .attr("x1", offset)
-      .attr("y1", offset)
-      .attr("x2", offset)
-      .attr("y2", offset + sliderYValue)
-      .attr("stroke", "red")
-      .attr("stroke-width", 0.5)
-      .attr("shape-rendering", "crispEdges")
-      .attr("vector-effect", "non-scaling-stroke")
-      .attr("stroke-linecap", "square");
+    // Combine paths and lines into a single path string
+    const pathData = `
+      M ${offset},${offset} 
+      L ${offset},${offset + sliderYValue}
+      M ${offset + sliderXValue},${offset} 
+      L ${offset + sliderXValue},${offset + sliderYValue}
+      M ${offset},${offset + sliderYValue}
+      A ${sliderXValue / 2},${offset} 0 0,0 ${offset + sliderXValue},${offset + sliderYValue}
+      M ${offset},${offset}
+      A ${sliderXValue / 2},${offset} 0 0,1 ${offset + sliderXValue},${offset}
+    `;
 
-    svg
-      .append("line")
-      .attr("x1", offset + sliderXValue)
-      .attr("y1", offset)
-      .attr("x2", offset + sliderXValue)
-      .attr("y2", offset + sliderYValue)
-      .attr("stroke", "red")
-      .attr("stroke-width", 0.5)
-      .attr("shape-rendering", "crispEdges")
-      .attr("vector-effect", "non-scaling-stroke")
-      .attr("stroke-linecap", "square");
-
-    // Draw path
-    const bottArc = `M ${offset},${offset + sliderYValue} A ${
-      sliderXValue / 2
-    },${offset} 0 0,0 ${offset + sliderXValue},${offset + sliderYValue}`;
-
+    // Draw the combined path
     svg
       .append("path")
-      .attr("d", bottArc)
-      .attr("fill", "none")
-      .attr("stroke", "blue")
-      .attr("stroke-width", 0.5)
-      .attr("vector-effect", "non-scaling-stroke");
-
-    // Draw path
-    const topArc = `M ${offset},${offset} A ${
-      sliderXValue / 2
-    },${offset} 0 0,1 ${offset + sliderXValue},${offset}`;
-
-    svg
-      .append("path")
-      .attr("d", topArc)
-      .attr("fill", "none")
+      .attr("d", pathData)
+      .attr("fill", "white")
       .attr("stroke", "blue")
       .attr("stroke-width", 0.5)
       .attr("vector-effect", "non-scaling-stroke");
@@ -96,7 +66,7 @@ const Index = () => {
       <p>X Value: {sliderXValue}</p>
       <svg
         ref={svgRef}
-        viewBox="0 0 200 200"
+        viewBox="0 -10 200 200"
         xmlns="http://www.w3.org/2000/svg"
         width={500}
         style={{ margin: "auto" }}

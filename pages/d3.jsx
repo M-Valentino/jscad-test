@@ -4,7 +4,7 @@ import * as d3 from "d3";
 const Index = () => {
   const [sliderValues, setSliderValues] = useState({ x: 100, y: 100 });
   const svgRef = useRef(null);
-  const offset = 10;
+  const offset = 30;
 
   const handleSliderChange = (axis, value) => {
     setSliderValues((prevValues) => ({
@@ -28,9 +28,9 @@ const Index = () => {
       M ${offset + x},${offset} 
       L ${offset + x},${offset + y}
       M ${offset},${offset + y}
-      A ${x / 2},${offset} 0 0,0 ${offset + x},${offset + y}
+      A ${x / 2},${offset / 2} 0 0,0 ${offset + x},${offset + y}
       M ${offset},${offset}
-      A ${x / 2},${offset} 0 0,1 ${offset + x},${offset}
+      A ${x / 2},${offset / 2} 0 0,1 ${offset + x},${offset}
     `;
 
     // Draw the combined path
@@ -66,7 +66,7 @@ const Index = () => {
       <p>X Value: {sliderValues.x}</p>
       <svg
         ref={svgRef}
-        viewBox="0 -10 200 200"
+        viewBox="0 0 200 200"
         xmlns="http://www.w3.org/2000/svg"
         width={500}
         style={{ margin: "auto" }}

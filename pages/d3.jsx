@@ -2,17 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
 
 const Index = () => {
-  const [sliderYValue, setSliderYValue] = useState(100);
-  const [sliderXValue, setSliderXValue] = useState(100);
+  const [sliderValues, setSliderValues] = useState({ x: 100, y: 100 });
   const svgRef = useRef(null);
   const offset = 10;
 
-  const handleSliderYChange = (e) => {
-    setSliderYValue(parseInt(e.target.value));
-  };
-
-  const handleSliderXChange = (e) => {
-    setSliderXValue(parseInt(e.target.value));
+  const handleSliderChange = (axis, value) => {
+    setSliderValues((prevValues) => ({
+      ...prevValues,
+      [axis]: parseInt(value),
+    }));
   };
 
   useEffect(() => {
@@ -21,16 +19,18 @@ const Index = () => {
     // Clear previous content
     svg.selectAll("*").remove();
 
+    const { x, y } = sliderValues;
+
     // Combine paths and lines into a single path string
     const pathData = `
       M ${offset},${offset} 
-      L ${offset},${offset + sliderYValue}
-      M ${offset + sliderXValue},${offset} 
-      L ${offset + sliderXValue},${offset + sliderYValue}
-      M ${offset},${offset + sliderYValue}
-      A ${sliderXValue / 2},${offset} 0 0,0 ${offset + sliderXValue},${offset + sliderYValue}
+      L ${offset},${offset + y}
+      M ${offset + x},${offset} 
+      L ${offset + x},${offset + y}
+      M ${offset},${offset + y}
+      A ${x / 2},${offset} 0 0,0 ${offset + x},${offset + y}
       M ${offset},${offset}
-      A ${sliderXValue / 2},${offset} 0 0,1 ${offset + sliderXValue},${offset}
+      A ${x / 2},${offset} 0 0,1 ${offset + x},${offset}
     `;
 
     // Draw the combined path
@@ -41,7 +41,7 @@ const Index = () => {
       .attr("stroke", "blue")
       .attr("stroke-width", 0.5)
       .attr("vector-effect", "non-scaling-stroke");
-  }, [sliderXValue, sliderYValue]);
+  }, [sliderValues]);
 
   return (
     <div>
@@ -50,20 +50,20 @@ const Index = () => {
         type="range"
         min={0}
         max={100}
-        value={sliderYValue}
-        onChange={handleSliderYChange}
+        value={sliderValues.y}
+        onChange={(e) => handleSliderChange("y", e.target.value)}
         style={{ width: 200, margin: "20px 0" }}
       />
-      <p>Y Value: {sliderYValue}</p>
+      <p>Y Value: {sliderValues.y}</p>
       <input
         type="range"
         min={0}
         max={100}
-        value={sliderXValue}
-        onChange={handleSliderXChange}
+        value={sliderValues.x}
+        onChange={(e) => handleSliderChange("x", e.target.value)}
         style={{ width: 200, margin: "20px 0" }}
       />
-      <p>X Value: {sliderXValue}</p>
+      <p>X Value: {sliderValues.x}</p>
       <svg
         ref={svgRef}
         viewBox="0 -10 200 200"

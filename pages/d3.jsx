@@ -13,7 +13,7 @@ const Index = () => {
     }));
   };
 
-  useEffect(() => {
+  const draw = () => {
     const svg = d3.select(svgRef.current);
 
     // Clear previous content
@@ -21,31 +21,42 @@ const Index = () => {
 
     const { x, y } = sliderValues;
 
-    const appendLine=(line)=> {
-      svg.append("path")
-      .attr("d", line)
-      .attr("fill", "none")
-      .attr("stroke", "blue")
-      .attr("stroke-width", 0.5)
-      .attr("vector-effect", "non-scaling-stroke");
-    }
+    const appendLine = (line) => {
+      svg
+        .append("path")
+        .attr("d", line)
+        .attr("fill", "none")
+        .attr("stroke", "blue")
+        .attr("stroke-width", 0.5)
+        .attr("vector-effect", "non-scaling-stroke");
+    };
 
-    const topValveBaseLeft = d3.line()([[(x / 2) + offset - 10, 10], [(x / 2) + offset - 10, 25]]);
+    const topValveBaseLeft = d3.line()([
+      [x / 2 + offset - 10, 10],
+      [x / 2 + offset - 10, 25],
+    ]);
     appendLine(topValveBaseLeft);
 
-    const topValveBaseRight = d3.line()([[(x / 2) + offset + 10, 10], [(x / 2) + offset + 10, 25]]);
+    const topValveBaseRight = d3.line()([
+      [x / 2 + offset + 10, 10],
+      [x / 2 + offset + 10, 25],
+    ]);
     appendLine(topValveBaseRight);
 
-    const topValveBaseTop = d3.line()([[(x / 2) + offset - 10, 10], [(x / 2) + offset + 10, 10]]);
+    const topValveBaseTop = d3.line()([
+      [x / 2 + offset - 10, 10],
+      [x / 2 + offset + 10, 10],
+    ]);
     appendLine(topValveBaseTop);
 
-// top of top valve
-svg.append('rect')
-  .attr('x', (x / 2) + offset - 12)
-  .attr('y', 8)
-  .attr('width', + ((x / 2) + offset + 12) - ((x / 2) + offset - 12) )
-  .attr('height', 2)
-  .attr('fill', '#000');
+    // top of top valve
+    svg
+      .append("rect")
+      .attr("x", x / 2 + offset - 12)
+      .attr("y", 8)
+      .attr("width", +(x / 2 + offset + 12) - (x / 2 + offset - 12))
+      .attr("height", 2)
+      .attr("fill", "#000");
 
     // contains sides and arcs of cylinder
     const pathData = `
@@ -60,13 +71,16 @@ svg.append('rect')
     `;
 
     svg
-    .append("path")
-    .attr("d", pathData)
-    .attr("fill", "white")
-    .attr("stroke", "blue")
-    .attr("stroke-width", 0.5)
-    .attr("vector-effect", "non-scaling-stroke");
+      .append("path")
+      .attr("d", pathData)
+      .attr("fill", "white")
+      .attr("stroke", "blue")
+      .attr("stroke-width", 0.5)
+      .attr("vector-effect", "non-scaling-stroke");
+  };
 
+  useEffect(() => {
+    draw();
   }, [sliderValues]);
 
   return (

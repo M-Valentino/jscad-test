@@ -21,7 +21,26 @@ const Index = () => {
 
     const { x, y } = sliderValues;
 
-    // Combine paths and lines into a single path string
+
+    const topValveBaseLeft = d3.line()([[(x / 2) + offset - 10, 10], [(x / 2) + offset - 10, 25]]);
+
+    svg.append("path")
+    .attr("d", topValveBaseLeft)
+    .attr("fill", "none")
+    .attr("stroke", "blue")
+    .attr("stroke-width", 0.5)
+    .attr("vector-effect", "non-scaling-stroke");
+
+    const topValveBaseRight = d3.line()([[(x / 2) + offset + 10, 10], [(x / 2) + offset + 10, 25]]);
+
+    svg.append("path")
+    .attr("d", topValveBaseRight)
+    .attr("fill", "none")
+    .attr("stroke", "blue")
+    .attr("stroke-width", 0.5)
+    .attr("vector-effect", "non-scaling-stroke");
+
+    // contains sides and arcs of cylinder
     const pathData = `
       M ${offset},${offset} 
       L ${offset},${offset + y}
@@ -33,14 +52,14 @@ const Index = () => {
       A ${x / 2},${offset / 2} 0 0,1 ${offset + x},${offset}
     `;
 
-    // Draw the combined path
     svg
-      .append("path")
-      .attr("d", pathData)
-      .attr("fill", "white")
-      .attr("stroke", "blue")
-      .attr("stroke-width", 0.5)
-      .attr("vector-effect", "non-scaling-stroke");
+    .append("path")
+    .attr("d", pathData)
+    .attr("fill", "white")
+    .attr("stroke", "blue")
+    .attr("stroke-width", 0.5)
+    .attr("vector-effect", "non-scaling-stroke");
+
   }, [sliderValues]);
 
   return (

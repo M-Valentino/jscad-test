@@ -75,7 +75,7 @@ svg.append('rect')
       <input
         type="range"
         min={0}
-        max={100}
+        max={200}
         value={sliderValues.y}
         onChange={(e) => handleSliderChange("y", e.target.value)}
         style={{ width: 200, margin: "20px 0" }}
@@ -92,7 +92,7 @@ svg.append('rect')
       <p>X Value: {sliderValues.x}</p>
       <svg
         ref={svgRef}
-        viewBox="0 0 200 200"
+        viewBox="0 0 200 300"
         xmlns="http://www.w3.org/2000/svg"
         width={500}
         style={{ margin: "auto" }}

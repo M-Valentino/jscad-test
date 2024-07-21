@@ -33,7 +33,6 @@ const Index = () => {
       .attr("vector-effect", "non-scaling-stroke")
       .attr("stroke-linecap", "square");
 
-
     svg.append("line")
       .attr("x1", offset + sliderXValue)
       .attr("y1", offset)
@@ -45,18 +44,17 @@ const Index = () => {
       .attr("vector-effect", "non-scaling-stroke")
       .attr("stroke-linecap", "square");
 
-    
-
     // Draw path
-    const pathData = `M ${offset},${offset + sliderYValue} A ${
+    const bottArc = `M ${offset},${offset + sliderYValue} A ${
       sliderXValue / 2
     },${offset} 0 0,0 ${offset + sliderXValue},${offset + sliderYValue}`;
 
     svg.append("path")
-      .attr("d", pathData)
+      .attr("d", bottArc)
       .attr("fill", "none")
       .attr("stroke", "blue")
-      .attr("stroke-width", 0.5);
+      .attr("stroke-width", 0.5)
+      .attr("vector-effect", "non-scaling-stroke");
   }, [sliderXValue, sliderYValue]);
 
   return (
@@ -70,9 +68,7 @@ const Index = () => {
         onChange={handleSliderYChange}
         style={{ width: 200, margin: "20px 0" }}
       />
-
       <p>Y Value: {sliderYValue}</p>
-
       <input
         type="range"
         min={0}

@@ -36,6 +36,17 @@ const Index = () => {
     const topValveBaseRight = d3.line()([[(x / 2) + offset + 10, 10], [(x / 2) + offset + 10, 25]]);
     appendLine(topValveBaseRight);
 
+    const topValveBaseTop = d3.line()([[(x / 2) + offset - 10, 10], [(x / 2) + offset + 10, 10]]);
+    appendLine(topValveBaseTop);
+
+// top of top valve
+svg.append('rect')
+  .attr('x', (x / 2) + offset - 12)
+  .attr('y', 8)
+  .attr('width', + ((x / 2) + offset + 12) - ((x / 2) + offset - 12) )
+  .attr('height', 2)
+  .attr('fill', '#000');
+
     // contains sides and arcs of cylinder
     const pathData = `
       M ${offset},${offset} 

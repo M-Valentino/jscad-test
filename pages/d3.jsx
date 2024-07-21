@@ -22,7 +22,8 @@ const Index = () => {
     svg.selectAll("*").remove();
 
     // Draw lines
-    svg.append("line")
+    svg
+      .append("line")
       .attr("x1", offset)
       .attr("y1", offset)
       .attr("x2", offset)
@@ -33,7 +34,8 @@ const Index = () => {
       .attr("vector-effect", "non-scaling-stroke")
       .attr("stroke-linecap", "square");
 
-    svg.append("line")
+    svg
+      .append("line")
       .attr("x1", offset + sliderXValue)
       .attr("y1", offset)
       .attr("x2", offset + sliderXValue)
@@ -49,8 +51,22 @@ const Index = () => {
       sliderXValue / 2
     },${offset} 0 0,0 ${offset + sliderXValue},${offset + sliderYValue}`;
 
-    svg.append("path")
+    svg
+      .append("path")
       .attr("d", bottArc)
+      .attr("fill", "none")
+      .attr("stroke", "blue")
+      .attr("stroke-width", 0.5)
+      .attr("vector-effect", "non-scaling-stroke");
+
+    // Draw path
+    const topArc = `M ${offset},${offset} A ${
+      sliderXValue / 2
+    },${offset} 0 0,1 ${offset + sliderXValue},${offset}`;
+
+    svg
+      .append("path")
+      .attr("d", topArc)
       .attr("fill", "none")
       .attr("stroke", "blue")
       .attr("stroke-width", 0.5)

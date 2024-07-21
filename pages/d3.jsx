@@ -21,24 +21,20 @@ const Index = () => {
 
     const { x, y } = sliderValues;
 
+    const appendLine=(line)=> {
+      svg.append("path")
+      .attr("d", line)
+      .attr("fill", "none")
+      .attr("stroke", "blue")
+      .attr("stroke-width", 0.5)
+      .attr("vector-effect", "non-scaling-stroke");
+    }
 
     const topValveBaseLeft = d3.line()([[(x / 2) + offset - 10, 10], [(x / 2) + offset - 10, 25]]);
-
-    svg.append("path")
-    .attr("d", topValveBaseLeft)
-    .attr("fill", "none")
-    .attr("stroke", "blue")
-    .attr("stroke-width", 0.5)
-    .attr("vector-effect", "non-scaling-stroke");
+    appendLine(topValveBaseLeft);
 
     const topValveBaseRight = d3.line()([[(x / 2) + offset + 10, 10], [(x / 2) + offset + 10, 25]]);
-
-    svg.append("path")
-    .attr("d", topValveBaseRight)
-    .attr("fill", "none")
-    .attr("stroke", "blue")
-    .attr("stroke-width", 0.5)
-    .attr("vector-effect", "non-scaling-stroke");
+    appendLine(topValveBaseRight);
 
     // contains sides and arcs of cylinder
     const pathData = `

@@ -33,58 +33,58 @@ const Index = () => {
 
     const drawTopValve = () => {
       const topValveBaseLeft = d3.line()([
-        [xMidpoint + offset - 10, 10],
-        [xMidpoint + offset - 10, offset],
+        [xMidpoint + offset - 8, 10],
+        [xMidpoint + offset - 8, offset],
       ]);
       appendLine(topValveBaseLeft);
 
       const topValveBaseRight = d3.line()([
-        [xMidpoint + offset + 10, 10],
-        [xMidpoint + offset + 10, offset],
+        [xMidpoint + offset + 8, 10],
+        [xMidpoint + offset + 8, offset],
       ]);
       appendLine(topValveBaseRight);
 
       const topValveBaseTop = d3.line()([
-        [xMidpoint + offset - 10, 10],
-        [xMidpoint + offset + 10, 10],
+        [xMidpoint + offset - 8, 10],
+        [xMidpoint + offset + 8, 10],
       ]);
       appendLine(topValveBaseTop);
 
       // top of top valve
       svg
         .append("rect")
-        .attr("x", xMidpoint + offset - 12)
+        .attr("x", xMidpoint + offset - 10)
         .attr("y", 8)
-        .attr("width", +(xMidpoint + offset + 12) - (xMidpoint + offset - 12))
+        .attr("width", +(xMidpoint + offset + 10) - (xMidpoint + offset - 10))
         .attr("height", 2)
         .attr("fill", "#000");
     };
 
     const drawBottomValve = () => {
       const topValveBaseLeft = d3.line()([
-        [xMidpoint + offset - 10,  y + offset],
-        [xMidpoint + offset - 10, 20 + y + offset],
+        [xMidpoint + offset - 8,  y + offset],
+        [xMidpoint + offset - 8, 20 + y + offset],
       ]);
       appendLine(topValveBaseLeft);
 
       const topValveBaseRight = d3.line()([
-        [xMidpoint + offset + 10,  y + offset],
-        [xMidpoint + offset + 10, 20 + y + offset],
+        [xMidpoint + offset + 8,  y + offset],
+        [xMidpoint + offset + 8, 20 + y + offset],
       ]);
       appendLine(topValveBaseRight);
 
       const topValveBaseTop = d3.line()([
-        [xMidpoint + offset - 10, 20 + y + offset],
-        [xMidpoint + offset + 10, 20 + y+ offset],
+        [xMidpoint + offset - 8, 20 + y + offset],
+        [xMidpoint + offset + 8, 20 + y+ offset],
       ]);
       appendLine(topValveBaseTop);
 
       // top of top valve
       svg
         .append("rect")
-        .attr("x", xMidpoint + offset - 12)
+        .attr("x", xMidpoint + offset - 10)
         .attr("y", y + offset + 20)
-        .attr("width", +(xMidpoint + offset + 12) - (xMidpoint + offset - 12))
+        .attr("width", +(xMidpoint + offset + 10) - (xMidpoint + offset - 10))
         .attr("height", 2)
         .attr("fill", "#000");
     };

@@ -5,7 +5,6 @@ const Index = () => {
   const [sliderValues, setSliderValues] = useState({ x: 100, y: 100 });
   const svgRef = useRef(null);
 
-
   const handleSliderChange = (axis, value) => {
     setSliderValues((prevValues) => ({
       ...prevValues,
@@ -32,7 +31,7 @@ const Index = () => {
         .attr("vector-effect", "non-scaling-stroke");
     };
 
-    const drawValve = () => {
+    const drawTopValve = () => {
       const topValveBaseLeft = d3.line()([
         [xMidpoint + offset - 10, 10],
         [xMidpoint + offset - 10, 25],
@@ -61,7 +60,37 @@ const Index = () => {
         .attr("fill", "#000");
     };
 
-    drawValve();
+    const drawBottomValve = () => {
+      const topValveBaseLeft = d3.line()([
+        [xMidpoint + offset - 10, 10 + y],
+        [xMidpoint + offset - 10, 25 + y],
+      ]);
+      appendLine(topValveBaseLeft);
+
+      const topValveBaseRight = d3.line()([
+        [xMidpoint + offset + 10, 10 + y],
+        [xMidpoint + offset + 10, 25 + y],
+      ]);
+      appendLine(topValveBaseRight);
+
+      const topValveBaseTop = d3.line()([
+        [xMidpoint + offset - 10, 25 + y],
+        [xMidpoint + offset + 10, 25 + y],
+      ]);
+      appendLine(topValveBaseTop);
+
+      // top of top valve
+      svg
+        .append("rect")
+        .attr("x", xMidpoint + offset - 12)
+        .attr("y", 8)
+        .attr("width", +(xMidpoint + offset + 12) - (xMidpoint + offset - 12))
+        .attr("height", 2)
+        .attr("fill", "#000");
+    };
+
+    drawTopValve();
+    drawBottomValve();
 
     // contains sides and arcs of cylinder
     const pathData = `

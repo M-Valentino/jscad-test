@@ -108,7 +108,7 @@ const Index = () => {
         .append("rect")
         .attr("x", xMidpoint + offset - 10)
         .attr("y", 8)
-        .attr("width", +(xMidpoint + offset + 10) - (xMidpoint + offset - 10))
+        .attr("width", xMidpoint + offset + 10 - (xMidpoint + offset - 10))
         .attr("height", 2)
         .attr("fill", "#000");
     };
@@ -137,7 +137,7 @@ const Index = () => {
         .append("rect")
         .attr("x", xMidpoint + offset - 10)
         .attr("y", y + offset + 20)
-        .attr("width", +(xMidpoint + offset + 10) - (xMidpoint + offset - 10))
+        .attr("width", xMidpoint + offset + 10 - (xMidpoint + offset - 10))
         .attr("height", 2)
         .attr("fill", "#000");
     };

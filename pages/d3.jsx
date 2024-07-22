@@ -21,11 +21,11 @@ const Index = () => {
     // Clear previous content
     svg.selectAll("*").remove();
 
-    const appendLine = (line) => {
+    const appendLine = (line, fill) => {
       svg
         .append("path")
         .attr("d", line)
-        .attr("fill", "none")
+        .attr("fill", fill === true ? "blue" : "none")
         .attr("stroke", "blue")
         .attr("stroke-width", 0.5)
         .attr("vector-effect", "non-scaling-stroke");
@@ -57,24 +57,28 @@ const Index = () => {
         ])
       );
 
-      // bottom arrow lines
-      appendLine(
-        d3.line()([
-          [p1[0] + (dimHeight - 10), p1[1]],
-          [p1[0] + (dimHeight - 10) + 2, p1[1] + 4],
-          [p1[0] + (dimHeight - 10), p1[1]],
-          [p1[0] + (dimHeight - 10) - 2, p1[1] + 4],
-        ])
-      );
-
       // top arrow lines
       appendLine(
         d3.line()([
+          [p1[0] + (dimHeight - 10), p1[1]],
+          [p1[0] + (dimHeight - 10) + 1, p1[1] + 4],
+          [p1[0] + (dimHeight - 10), p1[1]],
+          [p1[0] + (dimHeight - 10) - 1, p1[1] + 4],
+          [p1[0] + (dimHeight - 10) + 1, p1[1] + 4],
+        ]),
+        true
+      );
+
+      // bottom arrow lines
+      appendLine(
+        d3.line()([
           [p2[0] + (dimHeight - 10), p2[1]],
-          [p2[0] + (dimHeight - 10) + 2, p2[1] - 4],
+          [p2[0] + (dimHeight - 10) + 1, p2[1] - 4],
           [p2[0] + (dimHeight - 10), p2[1]],
-          [p2[0] + (dimHeight - 10) - 2, p2[1] - 4],
-        ])
+          [p2[0] + (dimHeight - 10) - 1, p2[1] - 4],
+          [p2[0] + (dimHeight - 10) + 1, p2[1] - 4],
+        ]),
+        true
       );
     };
 

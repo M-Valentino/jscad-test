@@ -33,47 +33,49 @@ const Index = () => {
 
     const dimensionLine = (p1, p2, dimHeight) => {
       const dimensionOffset = 5;
-      const lineGenerator = d3.line();
 
-      const paths = [
-        // horizontal lines
-        [
+      // horizontal lines
+      appendLine(
+        d3.line()([
           [p1[0] + dimensionOffset, p1[1]],
           [p1[0] + dimHeight, p1[1]],
-        ],
-        [
+        ])
+      );
+
+      appendLine(
+        d3.line()([
           [p2[0] + dimensionOffset, p2[1]],
           [p2[0] + dimHeight, p2[1]],
-        ],
-        // vertical bar
-        [
+        ])
+      );
+
+      // vertical bar
+      appendLine(
+        d3.line()([
           [p1[0] + (dimHeight - 10), p1[1]],
           [p2[0] + (dimHeight - 10), p2[1]],
-        ],
-        // bottom arrow lines
-        [
+        ])
+      );
+
+      // bottom arrow lines
+      appendLine(
+        d3.line()([
           [p1[0] + (dimHeight - 10), p1[1]],
           [p1[0] + (dimHeight - 10) + 2, p1[1] + 4],
-        ],
-        [
           [p1[0] + (dimHeight - 10), p1[1]],
           [p1[0] + (dimHeight - 10) - 2, p1[1] + 4],
-        ],
-        // top arrow lines
-        [
+        ])
+      );
+
+      // top arrow lines
+      appendLine(
+        d3.line()([
           [p2[0] + (dimHeight - 10), p2[1]],
           [p2[0] + (dimHeight - 10) + 2, p2[1] - 4],
-        ],
-        [
           [p2[0] + (dimHeight - 10), p2[1]],
           [p2[0] + (dimHeight - 10) - 2, p2[1] - 4],
-        ],
-      ];
-
-      paths.forEach((path) => {
-        const linePath = lineGenerator(path);
-        appendLine(linePath);
-      });
+        ])
+      );
     };
 
     dimensionLine([offset + x, offset], [offset + x, offset + y], 30);
@@ -159,7 +161,6 @@ const Index = () => {
       .attr("stroke-width", 0.5)
       .attr("vector-effect", "non-scaling-stroke");
 
-    
     svg
       .append("defs")
       .append("pattern")

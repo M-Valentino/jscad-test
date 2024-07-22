@@ -34,35 +34,49 @@ const Index = () => {
     const dimensionLine = (p1, p2, dimHeight) => {
       const dimensionOffset = 5;
       const lineGenerator = d3.line();
-    
+
       const paths = [
         // horizontal lines
-        [[p1[0] + dimensionOffset, p1[1]], [p1[0] + dimHeight, p1[1]]],
-        [[p2[0] + dimensionOffset, p2[1]], [p2[0] + dimHeight, p2[1]]],
+        [
+          [p1[0] + dimensionOffset, p1[1]],
+          [p1[0] + dimHeight, p1[1]],
+        ],
+        [
+          [p2[0] + dimensionOffset, p2[1]],
+          [p2[0] + dimHeight, p2[1]],
+        ],
         // vertical bar
-        [[p1[0] + (dimHeight - 10), p1[1]], [p2[0] + (dimHeight - 10), p2[1]]],
+        [
+          [p1[0] + (dimHeight - 10), p1[1]],
+          [p2[0] + (dimHeight - 10), p2[1]],
+        ],
         // bottom arrow lines
-        [[p1[0] + (dimHeight - 10), p1[1]], [p1[0] + (dimHeight - 10) + 2, p1[1] + 4]],
-        [[p1[0] + (dimHeight - 10), p1[1]], [p1[0] + (dimHeight - 10) - 2, p1[1] + 4]],
+        [
+          [p1[0] + (dimHeight - 10), p1[1]],
+          [p1[0] + (dimHeight - 10) + 2, p1[1] + 4],
+        ],
+        [
+          [p1[0] + (dimHeight - 10), p1[1]],
+          [p1[0] + (dimHeight - 10) - 2, p1[1] + 4],
+        ],
         // top arrow lines
-        [[p2[0] + (dimHeight - 10), p2[1]], [p2[0] + (dimHeight - 10) + 2, p2[1] - 4]],
-        [[p2[0] + (dimHeight - 10), p2[1]], [p2[0] + (dimHeight - 10) - 2, p2[1] - 4]],
+        [
+          [p2[0] + (dimHeight - 10), p2[1]],
+          [p2[0] + (dimHeight - 10) + 2, p2[1] - 4],
+        ],
+        [
+          [p2[0] + (dimHeight - 10), p2[1]],
+          [p2[0] + (dimHeight - 10) - 2, p2[1] - 4],
+        ],
       ];
-    
+
       paths.forEach((path) => {
         const linePath = lineGenerator(path);
         appendLine(linePath);
       });
     };
-    
-    
-    dimensionLine(
-      [offset + x, offset],
-      [offset + x, offset + y],
-      30
-    );
 
-
+    dimensionLine([offset + x, offset], [offset + x, offset + y], 30);
 
     const drawTopValve = () => {
       const topValveBaseLeft = d3.line()([
@@ -95,20 +109,20 @@ const Index = () => {
 
     const drawBottomValve = () => {
       const topValveBaseLeft = d3.line()([
-        [xMidpoint + offset - 8,  y + offset],
+        [xMidpoint + offset - 8, y + offset],
         [xMidpoint + offset - 8, 20 + y + offset],
       ]);
       appendLine(topValveBaseLeft);
 
       const topValveBaseRight = d3.line()([
-        [xMidpoint + offset + 8,  y + offset],
+        [xMidpoint + offset + 8, y + offset],
         [xMidpoint + offset + 8, 20 + y + offset],
       ]);
       appendLine(topValveBaseRight);
 
       const topValveBaseTop = d3.line()([
         [xMidpoint + offset - 8, 20 + y + offset],
-        [xMidpoint + offset + 8, 20 + y+ offset],
+        [xMidpoint + offset + 8, 20 + y + offset],
       ]);
       appendLine(topValveBaseTop);
 
@@ -144,6 +158,28 @@ const Index = () => {
       .attr("stroke", "blue")
       .attr("stroke-width", 0.5)
       .attr("vector-effect", "non-scaling-stroke");
+
+    
+    svg
+      .append("defs")
+      .append("pattern")
+      .attr("id", "weave-pattern")
+      .attr("width", 5)
+      .attr("height", 5)
+      .attr("patternUnits", "userSpaceOnUse")
+      .append("path")
+      .attr("d", "M0 0 L5 5 M5 0 L0 5")
+      .attr("stroke", "#000")
+      .attr("stroke-width", 0.5);
+
+    // Create the rectangle and apply the pattern as fill
+    svg
+      .append("rect")
+      .attr("x", offset)
+      .attr("y", 40)
+      .attr("width", x)
+      .attr("height", 15)
+      .attr("fill", "url(#weave-pattern)");
   };
 
   useEffect(() => {

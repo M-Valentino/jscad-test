@@ -5,6 +5,7 @@ const Index = () => {
   const [sliderValues, setSliderValues] = useState({ x: 100, y: 100 });
   const [showMesh, setShowMesh] = useState(true);
   const svgRef = useRef(null);
+  const svgHeight = 300; // Height of the SVG container
 
   const handleSliderChange = (axis, value) => {
     setSliderValues((prevValues) => ({
@@ -83,24 +84,28 @@ const Index = () => {
       );
     };
 
-    dimensionLine([offset + x, offset], [offset + x, offset + y], 30);
+    dimensionLine(
+      [offset + x, svgHeight - offset - y],
+      [offset + x, svgHeight - offset],
+      30
+    );
 
     const drawTopValve = () => {
       const topValveBaseLeft = d3.line()([
-        [xMidpoint + offset - 8, 10],
-        [xMidpoint + offset - 8, offset],
+        [xMidpoint + offset - 8, svgHeight - 10],
+        [xMidpoint + offset - 8, svgHeight - offset],
       ]);
       appendLine(topValveBaseLeft);
 
       const topValveBaseRight = d3.line()([
-        [xMidpoint + offset + 8, 10],
-        [xMidpoint + offset + 8, offset],
+        [xMidpoint + offset + 8, svgHeight - 10],
+        [xMidpoint + offset + 8, svgHeight - offset],
       ]);
       appendLine(topValveBaseRight);
 
       const topValveBaseTop = d3.line()([
-        [xMidpoint + offset - 8, 10],
-        [xMidpoint + offset + 8, 10],
+        [xMidpoint + offset - 8, svgHeight - 10],
+        [xMidpoint + offset + 8, svgHeight - 10],
       ]);
       appendLine(topValveBaseTop);
 
@@ -108,7 +113,7 @@ const Index = () => {
       svg
         .append("rect")
         .attr("x", xMidpoint + offset - 10)
-        .attr("y", 8)
+        .attr("y", svgHeight - 12)
         .attr("width", xMidpoint + offset + 10 - (xMidpoint + offset - 10))
         .attr("height", 2)
         .attr("fill", "#000");
@@ -116,20 +121,20 @@ const Index = () => {
 
     const drawBottomValve = () => {
       const topValveBaseLeft = d3.line()([
-        [xMidpoint + offset - 8, y + offset],
-        [xMidpoint + offset - 8, 20 + y + offset],
+        [xMidpoint + offset - 8, svgHeight - offset - y],
+        [xMidpoint + offset - 8, svgHeight - offset - y - 20],
       ]);
       appendLine(topValveBaseLeft);
 
       const topValveBaseRight = d3.line()([
-        [xMidpoint + offset + 8, y + offset],
-        [xMidpoint + offset + 8, 20 + y + offset],
+        [xMidpoint + offset + 8, svgHeight - offset - y],
+        [xMidpoint + offset + 8, svgHeight - offset - y - 20],
       ]);
       appendLine(topValveBaseRight);
 
       const topValveBaseTop = d3.line()([
-        [xMidpoint + offset - 8, 20 + y + offset],
-        [xMidpoint + offset + 8, 20 + y + offset],
+        [xMidpoint + offset - 8, svgHeight - offset - y - 20],
+        [xMidpoint + offset + 8, svgHeight - offset - y - 20],
       ]);
       appendLine(topValveBaseTop);
 
@@ -137,7 +142,7 @@ const Index = () => {
       svg
         .append("rect")
         .attr("x", xMidpoint + offset - 10)
-        .attr("y", y + offset + 20)
+        .attr("y", svgHeight - offset - y - 22)
         .attr("width", xMidpoint + offset + 10 - (xMidpoint + offset - 10))
         .attr("height", 2)
         .attr("fill", "#000");
@@ -148,14 +153,14 @@ const Index = () => {
 
     // contains sides and arcs of cylinder
     const pathData = `
-      M ${offset},${offset} 
-      L ${offset},${offset + y}
-      M ${offset + x},${offset} 
-      L ${offset + x},${offset + y}
-      M ${offset},${offset + y}
-      A ${xMidpoint},${offset / 2} 0 0,0 ${offset + x},${offset + y}
-      M ${offset},${offset}
-      A ${xMidpoint},${offset / 2} 0 0,1 ${offset + x},${offset}
+      M ${offset},${svgHeight - offset - y} 
+      L ${offset},${svgHeight - offset}
+      M ${offset + x},${svgHeight - offset - y} 
+      L ${offset + x},${svgHeight - offset}
+      M ${offset},${svgHeight - offset}
+      A ${xMidpoint},${offset / 2} 0 0,0 ${offset + x},${svgHeight - offset}
+      M ${offset},${svgHeight - offset - y}
+      A ${xMidpoint},${offset / 2} 0 0,1 ${offset + x},${svgHeight - offset - y}
     `;
 
     svg
@@ -183,7 +188,7 @@ const Index = () => {
       svg
         .append("rect")
         .attr("x", offset)
-        .attr("y", 40)
+        .attr("y", svgHeight - offset - 40)
         .attr("width", x)
         .attr("height", 15)
         .attr("fill", "url(#weave-pattern)");
@@ -218,11 +223,11 @@ const Index = () => {
 
       <br/>
       <br/>
-      <button onClick={() => setShowMesh(!showMesh)} style={{border: "1px solid blue"}}>Togle Mesh</button>
+      <button onClick={() => setShowMesh(!showMesh)} style={{border: "1px solid blue"}}>Toggle Mesh</button>
 
       <svg
         ref={svgRef}
-        viewBox="0 0 200 300"
+        viewBox={`0 0 200 ${svgHeight}`}
         xmlns="http://www.w3.org/2000/svg"
         width={500}
         style={{ position: "absolute", left: 300, top: 50, backgroundColor: "#fff"}}

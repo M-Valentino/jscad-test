@@ -225,7 +225,7 @@ const Index = () => {
         viewBox="0 0 200 300"
         xmlns="http://www.w3.org/2000/svg"
         width={500}
-        style={{ position: "absolute", left: 300, top: 50 }}
+        style={{ position: "absolute", left: 300, top: 50, backgroundColor: "#fff"}}
       ></svg>
     </div>
   );

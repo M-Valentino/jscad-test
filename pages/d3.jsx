@@ -34,13 +34,13 @@ const Index = () => {
     const drawTopValve = () => {
       const topValveBaseLeft = d3.line()([
         [xMidpoint + offset - 10, 10],
-        [xMidpoint + offset - 10, 25],
+        [xMidpoint + offset - 10, offset],
       ]);
       appendLine(topValveBaseLeft);
 
       const topValveBaseRight = d3.line()([
         [xMidpoint + offset + 10, 10],
-        [xMidpoint + offset + 10, 25],
+        [xMidpoint + offset + 10, offset],
       ]);
       appendLine(topValveBaseRight);
 
@@ -62,20 +62,20 @@ const Index = () => {
 
     const drawBottomValve = () => {
       const topValveBaseLeft = d3.line()([
-        [xMidpoint + offset - 10, 10 + y],
-        [xMidpoint + offset - 10, 25 + y],
+        [xMidpoint + offset - 10,  y + offset],
+        [xMidpoint + offset - 10, 20 + y + offset],
       ]);
       appendLine(topValveBaseLeft);
 
       const topValveBaseRight = d3.line()([
-        [xMidpoint + offset + 10, 10 + y],
-        [xMidpoint + offset + 10, 25 + y],
+        [xMidpoint + offset + 10,  y + offset],
+        [xMidpoint + offset + 10, 20 + y + offset],
       ]);
       appendLine(topValveBaseRight);
 
       const topValveBaseTop = d3.line()([
-        [xMidpoint + offset - 10, 25 + y],
-        [xMidpoint + offset + 10, 25 + y],
+        [xMidpoint + offset - 10, 20 + y + offset],
+        [xMidpoint + offset + 10, 20 + y+ offset],
       ]);
       appendLine(topValveBaseTop);
 
@@ -83,7 +83,7 @@ const Index = () => {
       svg
         .append("rect")
         .attr("x", xMidpoint + offset - 12)
-        .attr("y", 8)
+        .attr("y", y + offset + 20)
         .attr("width", +(xMidpoint + offset + 12) - (xMidpoint + offset - 12))
         .attr("height", 2)
         .attr("fill", "#000");

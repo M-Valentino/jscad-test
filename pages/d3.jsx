@@ -3,6 +3,7 @@ import * as d3 from "d3";
 
 const Index = () => {
   const [sliderValues, setSliderValues] = useState({ x: 100, y: 100 });
+  const [showMesh, setShowMesh] = useState(true);
   const svgRef = useRef(null);
 
   const handleSliderChange = (axis, value) => {
@@ -165,31 +166,33 @@ const Index = () => {
       .attr("stroke-width", 0.5)
       .attr("vector-effect", "non-scaling-stroke");
 
-    svg
-      .append("defs")
-      .append("pattern")
-      .attr("id", "weave-pattern")
-      .attr("width", 5)
-      .attr("height", 5)
-      .attr("patternUnits", "userSpaceOnUse")
-      .append("path")
-      .attr("d", "M0 0 L5 5 M5 0 L0 5")
-      .attr("stroke", "#000")
-      .attr("stroke-width", 0.5);
+    if (showMesh) {
+      svg
+        .append("defs")
+        .append("pattern")
+        .attr("id", "weave-pattern")
+        .attr("width", 5)
+        .attr("height", 5)
+        .attr("patternUnits", "userSpaceOnUse")
+        .append("path")
+        .attr("d", "M0 0 L5 5 M5 0 L0 5")
+        .attr("stroke", "#000")
+        .attr("stroke-width", 0.5);
 
-    // Create the rectangle and apply the pattern as fill
-    svg
-      .append("rect")
-      .attr("x", offset)
-      .attr("y", 40)
-      .attr("width", x)
-      .attr("height", 15)
-      .attr("fill", "url(#weave-pattern)");
+      // Create the rectangle and apply the pattern as fill
+      svg
+        .append("rect")
+        .attr("x", offset)
+        .attr("y", 40)
+        .attr("width", x)
+        .attr("height", 15)
+        .attr("fill", "url(#weave-pattern)");
+    }
   };
 
   useEffect(() => {
     draw();
-  }, [sliderValues]);
+  }, [sliderValues, showMesh]);
 
   return (
     <div>
@@ -212,12 +215,17 @@ const Index = () => {
         style={{ width: 200, margin: "20px 0" }}
       />
       <p>X Value: {sliderValues.x}</p>
+
+      <br/>
+      <br/>
+      <button onClick={() => setShowMesh(!showMesh)} style={{border: "1px solid blue"}}>Togle Mesh</button>
+
       <svg
         ref={svgRef}
         viewBox="0 0 200 300"
         xmlns="http://www.w3.org/2000/svg"
         width={500}
-        style={{ margin: "auto" }}
+        style={{ position: "absolute", left: 300, top: 50 }}
       ></svg>
     </div>
   );

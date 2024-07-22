@@ -188,7 +188,7 @@ const Index = () => {
       svg
         .append("rect")
         .attr("x", offset)
-        .attr("y", svgHeight - offset - 40)
+        .attr("y", svgHeight - offset - y + 20)
         .attr("width", x)
         .attr("height", 15)
         .attr("fill", "url(#weave-pattern)");

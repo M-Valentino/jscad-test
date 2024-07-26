@@ -90,36 +90,35 @@ const Index = () => {
       30
     );
 
-    const drawTopValve = () => {
-      const topValveBaseLeft = d3.line()([
+    const drawBottomValve = () => {
+      const bottValveBaseLeft = d3.line()([
         [xMidpoint + offset - 8, svgHeight - 10],
         [xMidpoint + offset - 8, svgHeight - offset],
       ]);
-      appendLine(topValveBaseLeft);
+      appendLine(bottValveBaseLeft);
 
-      const topValveBaseRight = d3.line()([
+      const bottValveBaseRight = d3.line()([
         [xMidpoint + offset + 8, svgHeight - 10],
         [xMidpoint + offset + 8, svgHeight - offset],
       ]);
-      appendLine(topValveBaseRight);
+      appendLine(bottValveBaseRight);
 
-      const topValveBaseTop = d3.line()([
+      const bottValveBaseTop = d3.line()([
         [xMidpoint + offset - 8, svgHeight - 10],
         [xMidpoint + offset + 8, svgHeight - 10],
       ]);
-      appendLine(topValveBaseTop);
+      appendLine(bottValveBaseTop);
 
-      // top of top valve
       svg
         .append("rect")
         .attr("x", xMidpoint + offset - 10)
-        .attr("y", svgHeight - 12)
-        .attr("width", xMidpoint + offset + 10 - (xMidpoint + offset - 10))
+        .attr("y", svgHeight - 10)
+        .attr("width", 20)
         .attr("height", 2)
         .attr("fill", "#000");
     };
 
-    const drawBottomValve = () => {
+    const drawTopValve = () => {
       const topValveBaseLeft = d3.line()([
         [xMidpoint + offset - 8, svgHeight - offset - y],
         [xMidpoint + offset - 8, svgHeight - offset - y - 20],
@@ -138,12 +137,11 @@ const Index = () => {
       ]);
       appendLine(topValveBaseTop);
 
-      // top of top valve
       svg
         .append("rect")
         .attr("x", xMidpoint + offset - 10)
         .attr("y", svgHeight - offset - y - 22)
-        .attr("width", xMidpoint + offset + 10 - (xMidpoint + offset - 10))
+        .attr("width", 20)
         .attr("height", 2)
         .attr("fill", "#000");
     };
@@ -221,16 +219,18 @@ const Index = () => {
       />
       <p>X Value: {sliderValues.x}</p>
 
-      <br/>
-      <br/>
-      <button onClick={() => setShowMesh(!showMesh)} style={{border: "1px solid blue"}}>Toggle Mesh</button>
+      <br />
+      <br />
+      <button onClick={() => setShowMesh(!showMesh)} style={{ border: "1px solid blue" }}>
+        Toggle Mesh
+      </button>
 
       <svg
         ref={svgRef}
         viewBox={`0 0 200 ${svgHeight}`}
         xmlns="http://www.w3.org/2000/svg"
         width={500}
-        style={{ position: "absolute", left: 300, top: 50, backgroundColor: "#fff"}}
+        style={{ position: "absolute", left: 300, top: 50, backgroundColor: "#fff" }}
       ></svg>
     </div>
   );

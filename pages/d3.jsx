@@ -149,22 +149,22 @@ const Index = () => {
 
     const drawLeftValve = () => {
       const topValveBaseLeft = d3.line()([
-        [ offset, svgHeight- yMidpoint - offset  ],
-        [ offset - 8, svgHeight- yMidpoint - offset ],
+        [offset, svgHeight - yMidpoint - offset - 8],
+        [offset - 8, svgHeight - yMidpoint - offset - 8],
       ]);
       appendLine(topValveBaseLeft);
 
-      // const topValveBaseRight = d3.line()([
-      //   [ offset + 8, yMidpoint - offset ],
-      //   [ offset + 8, yMidpoint - offset  - 20],
-      // ]);
-      // appendLine(topValveBaseRight);
+      const topValveBaseRight = d3.line()([
+        [offset, svgHeight - yMidpoint - offset + 8],
+        [offset - 8, svgHeight - yMidpoint - offset + 8],
+      ]);
+      appendLine(topValveBaseRight);
 
-      // const topValveBaseTop = d3.line()([
-      //   [ offset - 8, yMidpoint - offset  - 20],
-      //   [ offset + 8, svgHeight - offset  - 20],
-      // ]);
-      // appendLine(topValveBaseTop);
+      const topValveBaseTop = d3.line()([
+        [ offset -8 , svgHeight - yMidpoint - offset - 8],
+        [ offset - 8, svgHeight - yMidpoint - offset + 8],
+      ]);
+      appendLine(topValveBaseTop);
 
       // svg
       //   .append("rect")
@@ -251,7 +251,10 @@ const Index = () => {
 
       <br />
       <br />
-      <button onClick={() => setShowMesh(!showMesh)} style={{ border: "1px solid blue" }}>
+      <button
+        onClick={() => setShowMesh(!showMesh)}
+        style={{ border: "1px solid blue" }}
+      >
         Toggle Mesh
       </button>
 
@@ -260,7 +263,12 @@ const Index = () => {
         viewBox={`0 0 200 ${svgHeight}`}
         xmlns="http://www.w3.org/2000/svg"
         width={500}
-        style={{ position: "absolute", left: 300, top: 50, backgroundColor: "#fff" }}
+        style={{
+          position: "absolute",
+          left: 300,
+          top: 50,
+          backgroundColor: "#fff",
+        }}
       ></svg>
     </div>
   );

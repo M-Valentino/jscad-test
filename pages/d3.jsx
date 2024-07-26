@@ -166,13 +166,13 @@ const Index = () => {
       ]);
       appendLine(topValveBaseTop);
 
-      // svg
-      //   .append("rect")
-      //   .attr("x", xMidpoint + offset - 10)
-      //   .attr("y", svgHeight - offset - y - 22)
-      //   .attr("width", 20)
-      //   .attr("height", 2)
-      //   .attr("fill", "#000");
+      svg
+        .append("rect")
+        .attr("x", offset - 10)
+        .attr("y", svgHeight - offset - yMidpoint - 10)
+        .attr("width", 2)
+        .attr("height", 20)
+        .attr("fill", "#000");
     };
 
     drawTopValve();

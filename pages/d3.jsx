@@ -18,6 +18,7 @@ const Index = () => {
     const { x, y } = sliderValues;
     const offset = 30;
     const xMidpoint = x / 2;
+    const yMidpoint = y / 2;
     const svg = d3.select(svgRef.current);
 
     // Clear previous content
@@ -146,8 +147,37 @@ const Index = () => {
         .attr("fill", "#000");
     };
 
+    const drawLeftValve = () => {
+      const topValveBaseLeft = d3.line()([
+        [ offset, svgHeight- yMidpoint - offset  ],
+        [ offset - 8, svgHeight- yMidpoint - offset ],
+      ]);
+      appendLine(topValveBaseLeft);
+
+      // const topValveBaseRight = d3.line()([
+      //   [ offset + 8, yMidpoint - offset ],
+      //   [ offset + 8, yMidpoint - offset  - 20],
+      // ]);
+      // appendLine(topValveBaseRight);
+
+      // const topValveBaseTop = d3.line()([
+      //   [ offset - 8, yMidpoint - offset  - 20],
+      //   [ offset + 8, svgHeight - offset  - 20],
+      // ]);
+      // appendLine(topValveBaseTop);
+
+      // svg
+      //   .append("rect")
+      //   .attr("x", xMidpoint + offset - 10)
+      //   .attr("y", svgHeight - offset - y - 22)
+      //   .attr("width", 20)
+      //   .attr("height", 2)
+      //   .attr("fill", "#000");
+    };
+
     drawTopValve();
     drawBottomValve();
+    drawLeftValve();
 
     // contains sides and arcs of cylinder
     const pathData = `

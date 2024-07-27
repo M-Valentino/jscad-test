@@ -19,6 +19,7 @@ const Index = () => {
     const offset = 30;
     const xMidpoint = x / 2;
     const yMidpoint = y / 2;
+    const arcRadius = 15;
     const svg = d3.select(svgRef.current);
 
     // Clear previous content
@@ -86,8 +87,8 @@ const Index = () => {
     };
 
     dimensionLine(
-      [offset + x, svgHeight - offset - y],
-      [offset + x, svgHeight - offset],
+      [offset + x, svgHeight - offset - y - arcRadius],
+      [offset + x, svgHeight - offset + arcRadius],
       30
     );
 
@@ -186,9 +187,9 @@ const Index = () => {
       M ${offset + x},${svgHeight - offset - y} 
       L ${offset + x},${svgHeight - offset}
       M ${offset},${svgHeight - offset}
-      A ${xMidpoint},${offset / 2} 0 0,0 ${offset + x},${svgHeight - offset}
+      A ${xMidpoint},${arcRadius} 0 0,0 ${offset + x},${svgHeight - offset}
       M ${offset},${svgHeight - offset - y}
-      A ${xMidpoint},${offset / 2} 0 0,1 ${offset + x},${svgHeight - offset - y}
+      A ${xMidpoint},${arcRadius} 0 0,1 ${offset + x},${svgHeight - offset - y}
     `;
 
     svg

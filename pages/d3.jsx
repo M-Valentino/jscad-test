@@ -84,12 +84,19 @@ const Index = () => {
         ]),
         true
       );
+
+      svg
+        .append("text")
+        .attr("x", dimHeight + offset + x / 1.6)
+        .attr("y", svgHeight - offset - yMidpoint)
+        .attr("class", "text")
+        .text("H");
     };
 
     dimensionLine(
-      [offset + x, svgHeight - offset - y - arcRadius],
-      [offset + x, svgHeight - offset + arcRadius],
-      30
+      [offset + xMidpoint + 10, svgHeight - offset - y - arcRadius],
+      [offset + xMidpoint + 10, svgHeight - offset + arcRadius],
+      x - x / 3 + 10
     );
 
     const drawBottomValve = () => {
@@ -162,8 +169,8 @@ const Index = () => {
       appendLine(topValveBaseRight);
 
       const topValveBaseTop = d3.line()([
-        [ offset -8 , svgHeight - yMidpoint - offset - 8],
-        [ offset - 8, svgHeight - yMidpoint - offset + 8],
+        [offset - 8, svgHeight - yMidpoint - offset - 8],
+        [offset - 8, svgHeight - yMidpoint - offset + 8],
       ]);
       appendLine(topValveBaseTop);
 
@@ -270,7 +277,9 @@ const Index = () => {
           top: 50,
           backgroundColor: "#fff",
         }}
-      ></svg>
+      >
+
+      </svg>
     </div>
   );
 };

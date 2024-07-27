@@ -160,7 +160,7 @@ const Index = () => {
     dimensionDiameterLine(
       [offset, svgHeight - offset - y],
       [offset + x, svgHeight - offset - y],
-      20
+      40
     );
 
     const drawBottomValve = () => {

@@ -35,13 +35,13 @@ const Index = () => {
         .attr("vector-effect", "non-scaling-stroke");
     };
 
-    const dimensionLine = (p1, p2, dimHeight) => {
+    const dimensionLine = (p1, p2, dimHeight, topLeaderLineOffset) => {
       const dimensionOffset = 5;
 
       // horizontal lines
       appendLine(
         d3.line()([
-          [p1[0] + dimensionOffset, p1[1]],
+          [p1[0] + dimensionOffset + topLeaderLineOffset, p1[1]],
           [p1[0] + dimHeight, p1[1]],
         ])
       );
@@ -154,7 +154,8 @@ const Index = () => {
     dimensionLine(
       [offset + xMidpoint + 10, svgHeight - offset - y - arcRadius],
       [offset + xMidpoint + 10, svgHeight - offset + arcRadius],
-      x - x / 3 + 10
+      x - x / 3 + 10,
+      x / 2 - 10
     );
 
     dimensionDiameterLine(

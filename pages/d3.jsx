@@ -29,8 +29,8 @@ const Index = () => {
       svg
         .append("path")
         .attr("d", line)
-        .attr("fill", fill === true ? "blue" : "none")
-        .attr("stroke", "blue")
+        .attr("fill", fill === true ? "#000" : "none")
+        .attr("stroke", "#000")
         .attr("stroke-width", 0.5)
         .attr("vector-effect", "non-scaling-stroke");
     };
@@ -145,8 +145,8 @@ const Index = () => {
 
       svg
         .append("text")
-        .attr("x", (p1[0] + p2[0]) / 2 - 10)
-        .attr("y", p1[1] - dimHeight - 5)
+        .attr("x", (p1[0] + p2[0]) / 2 - 5)
+        .attr("y", p1[1] + offset - 27 - dimHeight )
         .attr("class", "text")
         .text("D");
     };
@@ -268,7 +268,7 @@ const Index = () => {
       .append("path")
       .attr("d", pathData)
       .attr("fill", "white")
-      .attr("stroke", "blue")
+      .attr("stroke", "#000")
       .attr("stroke-width", 0.5)
       .attr("vector-effect", "non-scaling-stroke");
 
@@ -326,7 +326,7 @@ const Index = () => {
       <br />
       <button
         onClick={() => setShowMesh(!showMesh)}
-        style={{ border: "1px solid blue" }}
+        style={{ border: "1px solid #000" }}
       >
         Toggle Mesh
       </button>

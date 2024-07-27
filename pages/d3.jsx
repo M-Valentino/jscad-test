@@ -93,10 +93,74 @@ const Index = () => {
         .text("H");
     };
 
+    const dimensionDiameterLine = (p1, p2, dimWidth) => {
+      const dimensionOffset = 5;
+
+      // vertical lines
+      appendLine(
+        d3.line()([
+          [p1[0], p1[1] - dimensionOffset],
+          [p1[0], p1[1] - dimWidth],
+        ])
+      );
+
+      appendLine(
+        d3.line()([
+          [p2[0], p2[1] - dimensionOffset],
+          [p2[0], p2[1] - dimWidth],
+        ])
+      );
+
+      // horizontal bar
+      appendLine(
+        d3.line()([
+          [p1[0], p1[1] - (dimWidth - 10)],
+          [p2[0], p2[1] - (dimWidth - 10)],
+        ])
+      );
+
+      // left arrow lines
+      appendLine(
+        d3.line()([
+          [p1[0], p1[1] - (dimWidth - 10)],
+          [p1[0] + 4, p1[1] - (dimWidth - 10) + 1],
+          [p1[0], p1[1] - (dimWidth - 10)],
+          [p1[0] + 4, p1[1] - (dimWidth - 10) - 1],
+          [p1[0] + 4, p1[1] - (dimWidth - 10) + 1],
+        ]),
+        true
+      );
+
+      // right arrow lines
+      appendLine(
+        d3.line()([
+          [p2[0], p2[1] - (dimWidth - 10)],
+          [p2[0] - 4, p2[1] - (dimWidth - 10) + 1],
+          [p2[0], p2[1] - (dimWidth - 10)],
+          [p2[0] - 4, p2[1] - (dimWidth - 10) - 1],
+          [p2[0] - 4, p2[1] - (dimWidth - 10) + 1],
+        ]),
+        true
+      );
+
+      svg
+        .append("text")
+        .attr("x", (p1[0] + p2[0]) / 2 - 10)
+        .attr("y", p1[1] - dimWidth - 5)
+        .attr("class", "text")
+        .text("D");
+    };
+
     dimensionLine(
       [offset + xMidpoint + 10, svgHeight - offset - y - arcRadius],
       [offset + xMidpoint + 10, svgHeight - offset + arcRadius],
       x - x / 3 + 10
+    );
+
+    dimensionDiameterLine(
+      [offset, svgHeight - offset - y],
+      [offset + x, svgHeight - offset - y],
+      20
     );
 
     const drawBottomValve = () => {

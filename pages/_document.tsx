@@ -4,9 +4,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head>
-          <title>OpenJSCAD React Next.js Starter</title>
-        </Head>
+        <Head/>
         <body className="bg-gray-200">
           <Main />
           <NextScript />

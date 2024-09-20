@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Head from "next/head";
 import * as d3 from "d3";
 
 const Index = () => {
@@ -301,6 +302,10 @@ const Index = () => {
   }, [sliderValues, showMesh]);
 
   return (
+    <>
+    <Head>
+      <title>Demo</title>
+    </Head>
     <div>
       <h1>2D SVG</h1>
       <input
@@ -346,6 +351,7 @@ const Index = () => {
 
       </svg>
     </div>
+    </>
   );
 };
 
